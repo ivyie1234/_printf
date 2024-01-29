@@ -7,9 +7,12 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list arg;
-	va_start(args, format);
+	va_list args;
 	int r = 0;
+	char p;
+	char q;
+
+	va_start(args, format);
 
 	while (*format != '\0')
 	{
@@ -18,20 +21,29 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 's')
 			{
-				char *p = va_arg(args,char *);
+				p = va_arg(args, char *);
 
 				while (*p != '\0')
 				{
 					r += putchar(*p);
-					p++;	
+					p++;
 				}
 			}
 			else if (*format == 'c')
 			{
-				int c = va_arg(args, int);
-				r + putchar(c)
-
+				q = va_arg(args, int);
+				r + putchar(q);
 			}
-
+			else if (*format == '%')
+				r += putchar('%');
 		}
+		else
+		{
+			putchar(*format);
+		}
+		format++;
+	}
+	va_end args;
+
+	return (r);
 }
