@@ -1,0 +1,55 @@
+#include "main.h"
+
+/**
+*_printf - entry
+*@format: ...
+*
+*Return: count
+*/
+
+int _printf(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    int count = 0;  
+
+    while (*format != '\0') {
+        if (*format == '%') {
+            format++;
+
+            if (*format == 'c') {
+                // %c: character
+                char value = (char) va_arg(args, int); 
+                putchar(value);
+                count++;
+            } else if (*format == 's') {
+                // %s: string
+                char *str = va_arg(args, char *);
+                while (*str != '\0') {
+                    putchar(*str);
+                    str++;
+                    count++;
+                }
+            } else if (*format == '%') {
+                // %%: percent sign
+                putchar('%');
+                count++;
+            } else {
+              
+                putchar('%');
+                count++;
+                putchar(*format);
+                count++;
+            }
+        } else {
+            putchar(*format);
+            count++;
+        }
+
+        format++;
+    }
+
+    va_end(args);
+
+    return count;
+}
