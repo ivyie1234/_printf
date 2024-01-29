@@ -1,0 +1,13 @@
+#include "main.h"
+
+/**
+*_printf - entry
+*@format: ...
+*
+*Return: count
+*/
+
+int _printf(const char *format, ...)
+{
+
+}
