@@ -1,1 +1,38 @@
-#include 
+#include "main.h"
+#include <stdarg.h>
+#include <stdio.h>
+
+/**
+ * _printf - a function that produces output according to a format
+ * @format: character string
+ * Return: number of characters printed
+ */
+int _printf(const char *format, ...)
+{
+    va_list args;
+    int r = 0;
+
+    va_start(args, format);
+
+    while (*format != '\0')
+    {
+        if (*format == '%')
+        {
+            format++;
+            if (*format == 'd' || *format == 'i')
+            {
+                int p = va_arg(args, int);
+                r += printf("%d", p);
+            }
+        }
+        else
+        {
+            r += putchar(*format);
+        }
+        format++;
+    }
+
+    va_end(args);
+
+    return r;
+}
