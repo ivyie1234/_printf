@@ -9,7 +9,7 @@ int _printf(const char *format, ...)
 {
 	va_list arg;
 	va_start(args, format);
-	int count = 0;
+	int r = 0;
 
 	while (*format != '\0')
 	{
@@ -18,9 +18,18 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 's')
 			{
-				while
-			}else if (*format == 'c')
+				char *p = va_arg(args,char *);
+
+				while (*p != '\0')
+				{
+					r += putchar(*p);
+					p++;	
+				}
+			}
+			else if (*format == 'c')
 			{
+				int c = va_arg(args, int);
+				r + putchar(c)
 
 			}
 
